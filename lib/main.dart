@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'menu.dart'; // Import menu.dart file
+import 'screens/menu.dart'; // Import menu.dart file
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ).copyWith(secondary: Colors.blueAccent[400]),
       ),
-      home: MyHomePage(), // removed const and title parameter
+      home: MyHomePage(), 
     );
   }
 }

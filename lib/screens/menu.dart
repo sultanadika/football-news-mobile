@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:football_news/widgets/left_drawer.dart';
+import 'package:football_news/screens/newslist_form.dart';
 
-// Step 2: Changing the Widget Page Menu to Stateless
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  // Step 3: Creating variables for NPM, name, and class
-  final String nama = "Sultanadika Shidqi M"; // Name
-  final String npm = "2406365326"; // NPM
-  final String kelas = "KKI"; // Class
+  final String nama = "Sultanadika Shidqi M";
+  final String npm = "2406365326";
+  final String kelas = "KKI";
 
-  // Step 4: Creating a list of ItemHomepage
   final List<ItemHomepage> items = [
     ItemHomepage("See Football News", Icons.newspaper),
     ItemHomepage("Add News", Icons.add),
@@ -18,7 +17,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Step 5: Integrating InfoCard and ItemCard to Display on MyHomePage
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -27,12 +25,12 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Row for InfoCards
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -41,9 +39,7 @@ class MyHomePage extends StatelessWidget {
                 InfoCard(title: 'Class', content: kelas),
               ],
             ),
-
             const SizedBox(height: 16.0),
-
             Center(
               child: Column(
                 children: [
@@ -78,7 +74,6 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// Step 3: Creating InfoCard widget
 class InfoCard extends StatelessWidget {
   final String title;
   final String content;
@@ -104,18 +99,14 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-// Step 4: Creating ItemHomepage class
 class ItemHomepage {
   final String name;
   final IconData icon;
-
   ItemHomepage(this.name, this.icon);
 }
 
-// Step 4: Creating ItemCard widget
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
-
   const ItemCard(this.item, {super.key});
 
   @override
@@ -128,10 +119,15 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!"),
-              ),
+              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!")),
             );
+
+          if (item.name == "Add News") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NewsFormPage()),
+            );
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),
